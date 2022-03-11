@@ -1,0 +1,112 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: PetsAlone
+  description: APIs for missing pets
+  contact:
+    name: sajjan jyothi
+    email: sajjan.jyothisv@gmail.com
+servers:
+  - url: http://localhost:8080/
+paths:
+  /api/pets:
+    get:
+      summary: Returns all pets
+      description: |
+        Return all missing pets details
+      operationId: getAllPets
+      responses:
+        '200':
+          description: all pet response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Creates a new missing pet
+      description: Creates a new missing pet
+      operationId: addPet
+      requestBody:
+        description: Pet to add to the system
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pet'
+      responses:
+        '200':
+          description: pet response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/pets/{type}:
+    get:
+      summary: Returns a specific pet type
+      description: Returns pets based on pet type
+      operationId: findPetByType
+      parameters:
+        - name: type
+          in: path
+          description: type of pet
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: pet response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Pet:
+      type: object
+      required:
+        - name
+        - petType
+        - missingSince
+      properties:
+        name:
+          type: string
+        petType:
+          type: string
+        missingSince:
+          type: string
+          format: "date-time"
+
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Error code
+        message:
+          type: string
+          description: Error message
