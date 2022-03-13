@@ -58,6 +58,7 @@ make test
     make build-react ; make run-react and access gui as http://localhost:8080
 ```
 ## Observations/Suggestions
+- OpenAPI specification based code generated using third party module - https://github.com/deepmap/oapi-codegen
 - pet_type changed in db as string from integer for ease of use
 - Logger library added - zap (go.uber.org/zap)
 - API endpoint implementations are in api/service.go
