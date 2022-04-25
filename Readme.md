@@ -1,4 +1,4 @@
-# PetsAlone Technical Assesment
+# PetsAlone
 
 Picture the scene…you’ve tuned into your favourite show on Netflix ready to relax for the evening…and the phone rings…
 
